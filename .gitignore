@@ -1,0 +1,21 @@
+# Python
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+venv/
+ENV/
+env/
+*.sqlite3
+
+# Django
+*.log
+media/
+staticfiles/
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
