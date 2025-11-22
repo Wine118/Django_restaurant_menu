@@ -1,3 +1,5 @@
+@import url("media-query.css");
+
 /* Index.html(Main) Page CSS */
 body{
     margin: 0;
@@ -34,6 +36,9 @@ footer {
 body {
     padding-top: 20px;
     padding-bottom: 20px;
+}
+header nav {
+    background: #013E3F;
 }
 header a, footer a {
     color: #F0E3DB;
@@ -184,3 +189,76 @@ button:hover{
         transform: translateX(-50%); /*move commpletely to the left*/
     }
 }
+
+/* Contact Page */
+.container-email{
+    width: 90%;
+    max-width: 600px;
+    margin: 80px auto;
+    background: #F0E3DB;
+    padding:  30px;
+    padding-right: 50px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+}
+.complain-email{
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    border-bottom: 2px solid #013E3F;
+    padding-bottom: 10px;
+    color:#013E3F;
+}
+
+.complaint-file{
+    text-align: center;
+    font-size: 23px;
+    font-weight: bold;
+    color: #013E3F;
+    
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color:#013E3F;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: 1px solid hsl(181, 97%, 25%);
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+input:focus, textarea:focus {
+    border-color: #013E3F;
+    outline: none;
+    box-shadow: 0 0 5px rgba(1, 62, 63, 0.3);
+} 
+textarea {
+    height: 300px;
+    resize: none;
+}
+
+#send-button {
+    align-self: center;
+}
+
+.contact-phone {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #013E3F;
+}
+

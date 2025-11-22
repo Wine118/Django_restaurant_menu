@@ -1,0 +1,172 @@
+/* Tablet view (max-width: 900px) */
+
+@media (max-width: 900px) {
+    /* Index.html */
+    .container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .left, .right {
+        width: 90%;
+        margin-bottom: 20px;
+    }
+
+    .logo {
+        width: 200px;
+        height: 200px;
+    }
+
+    .special-img {
+        width: 300px;
+        height: 220px;
+
+    }
+
+    header nav a {
+        font-size: 16px;
+        margin-left: 10px;
+        padding-right: 10px;
+
+    }
+    header nav {
+        padding-right:  10px;
+        margin-right: 10px;
+        background: none;
+    }
+
+    footer span {
+        text-align: center;
+        width: 100%;
+        display: block;
+    }
+    /* Contact.html page form */
+    .container-email{
+        width: 95%;
+        padding: 20px;
+    }
+
+    .complain-email{
+        font-size: 22px;
+    }
+
+    input, textarea {
+        font-size: 15px;
+    }
+
+    #send-button {
+        width: 50%;
+        font-size: 16px;
+    }
+
+    .contact-phone {
+        font-size: 16px;
+    }
+
+}
+
+@media (max-width: 600px) {
+    /* HEADER */
+
+    header{
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        padding: 10px 0;
+    }
+
+    .logo-text {
+        font-size: 22px;
+        margin-bottom: 10px;
+    }
+
+    nav{
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        background: none;
+    }
+
+    nav a {
+        font-size: 16px;
+        padding: 5px 10px;
+    }
+
+    /* MAIN LAYOUT -> stack vertically */
+    .container {
+        flex-direction :column;
+        align-items: center;
+        text-align: center;
+        padding: 15px;
+    }
+
+    .left, .right{
+        width: 100%;
+        padding: 10px;
+    }
+
+    
+    .logo{
+        width: 180px;
+        height: 180px;
+        padding-top: 10px;
+    }
+
+    .special-img{
+        width: 260px;
+        height: 200px;
+    }
+
+    /* GO TO MENU BUTTON */
+    .menu-btn {
+        width: 60%;
+        margin-top: 10px;
+        padding: 12px;
+        font-size: 18px;
+    }
+
+    /* FOOTER */
+    footer {
+        text-align: center;
+    }
+
+    footer span {
+        width: 100%;
+        text-align: center;
+        display: block;
+        font-size: 16px;
+    }
+
+    /* Contact.html page */
+    .container-email {
+        width: 100%;
+        margin: 20px auto;
+        padding: 15px;
+    }
+
+    .complain-email {
+        font-size: 20px;
+    }
+
+    input, textarea {
+         width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    box-sizing: border-box; /* includes padding + border in the width calculation */
+    }
+
+    textarea {
+        height: 200px; /* shorter for mobile */
+    }
+
+    #send-button {
+        width: 100%;
+        font-size: 16px;
+        padding: 12px;
+    }
+
+    .contact-phone {
+        font-size: 14px;
+    }
+}

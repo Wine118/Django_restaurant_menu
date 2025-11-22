@@ -20,9 +20,9 @@
     </div>
     <nav>
         <a href="{% url 'index' %}">Home</a>
-        <a href="#">Menu</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
+        <a href="{% url 'index' %}">Menu</a>
+        <a href="{% url 'index' %}">About</a>
+        <a href="{% url 'contact'%}">Contact</a>
     </nav>
   </header>
 
@@ -36,7 +36,7 @@
         <div class="right">
             <h2>"Today's Special Menu"</h2>
             <img id="special-img" src="{% static 'images/special/special1.jpg'%}" class="special-img" alt="Today's Special Dish">
-            <h3>ကြက်ကုန်းဘောင်</h3>
+            <h3 id="special-name">ကြက်ကုန်းဘောင်</h3>
             <button>Order</button>
         </div>
         
@@ -51,6 +51,17 @@
   </footer>
 
   <!-- Link to your JavaScript (defer ensures it runs after HTML is parsed) -->
-  <script src="{% static 'Javascript/script.js' %}"></script>
+  
+  <!-- Pass images array from template -->
+
+
+  <script>
+    window.image = [
+      "{% static 'images/special/special1.jpg' %}",
+      "{% static 'images/special/special2.jpg' %}",
+      "{% static 'images/special/special3.jpg' %}"
+    ];
+  </script>
+  <script src="{% static 'Javascript/index.js' %}" defer></script>
 </body>
 </html>

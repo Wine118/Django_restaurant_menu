@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Than Lwin Cafe</title>
+
+  <!-- Link to your stylesheet -->
+   {% load static %}
+   <link rel="icon" type="image/png" href="{% static 'images/logo.png' %}"/>
+  <link rel="stylesheet" href="{% static 'CSS/style.css' %}" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+  <header>
+    <div class="logo-text">
+        THAN LWIN Cafe
+    </div>
+    <nav>
+        <a href="{% url 'index' %}">Home</a>
+        <a href="{% url 'index' %}">Menu</a>
+        <a href="{% url 'index' %}">About</a>
+        <a href="{% url 'contact'%}">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    
+    <div class="container-email">
+      <h2 class="complain-email">Email to Complain</h2>
+        <h3 class="complaint-file">Your complaint file is successfully committed.</h3>
+      <div class="contact-phone">Restaurant Phone: 09-1234567</div>
+
+    </div>
+    
+  </main>
+
+  <footer>
+        <span>@2025 Created by Maddyson.</span>
+  </footer>
+
+  <!-- Link to your JavaScript (defer ensures it runs after HTML is parsed) -->
+  <script defer src="{% static 'Javascript/index.js' %}"></script>
+</body>
+</html>
