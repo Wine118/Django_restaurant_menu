@@ -21,5 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls')),   # include your app routes
     path('complaints/', include('complaints.urls')),
+    path('menu/',include('menu.urls')),
 ]
 

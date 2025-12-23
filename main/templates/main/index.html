@@ -1,28 +1,30 @@
+
+
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Than Lwin Cafe</title>
-
+  {% load static %}
   <!-- Link to your stylesheet -->
-   {% load static %}
    <link rel="icon" type="image/png" href="{% static 'images/logo.png'%}"/>
-  <link rel="stylesheet" href="{% static 'CSS/style.css' %}" />
-
+  <link rel="stylesheet" href="{% static 'CSS/style.css'%}" />
+  <link rel="stylesheet" href="{% static 'CSS/index.css'%}" />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;700&display=swap" rel="stylesheet">
 
 </head>
 <body>
   <header>
     <div class="logo-text">
+         <img src="{% static 'images/logo.png' %}" alt="Than Lwin Cafe Logo" class="logo-img">
         THAN LWIN Cafe
     </div>
     <nav>
         <a href="{% url 'index' %}">Home</a>
         <a href="{% url 'index' %}">Menu</a>
         <a href="{% url 'index' %}">About</a>
-        <a href="{% url 'contact'%}">Contact</a>
+        <a href="{% url 'contact' %}">Contact</a>
     </nav>
   </header>
 
@@ -36,12 +38,12 @@
         <div class="right">
             <h2>"Today's Special Menu"</h2>
             <img id="special-img" src="{% static 'images/special/special1.jpg'%}" class="special-img" alt="Today's Special Dish">
-            <h3 id="special-name">ကြက်ကုန်းဘောင်</h3>
-            <button>Order</button>
+            <h3>ကြက်ကုန်းဘောင်</h3>
+            <button  id="special-btn">Order</button>
         </div>
         
     </div>
-    <a href="#" class="menu-btn">Go to Menu Page</a>
+    <a href="{%url 'index' %}" class="menu-btn">Go to Menu Page</a>
 
     
   </main>
@@ -51,12 +53,8 @@
   </footer>
 
   <!-- Link to your JavaScript (defer ensures it runs after HTML is parsed) -->
-  
-  <!-- Pass images array from template -->
-
-
-  <script>
-    window.image = [
+     <script>
+    window.images = [
       "{% static 'images/special/special1.jpg' %}",
       "{% static 'images/special/special2.jpg' %}",
       "{% static 'images/special/special3.jpg' %}"

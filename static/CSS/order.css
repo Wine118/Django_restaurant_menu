@@ -1,0 +1,540 @@
+#to-order{
+    width: 95%;
+    max-width: 1000px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family:  Arial, "Noto Sans Myanmar", sans-serif;
+}
+
+#to-order h2{
+    text-align: center;
+    color: #013E3F;
+    font-size: 40px;
+    padding-top: 30px;
+    padding-bottom: 20px;
+    margin: 0px;
+}
+
+.order-row-header{
+    display: grid;
+    grid-template-columns: 5fr 1fr 2fr 2fr 40px; /* all equal */
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 4px double #013E3F;
+    width: 100%;
+    box-sizing: border-box;
+    justify-items: left;
+    color: #013E3F;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+#order-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.order-row{
+    display: grid;
+    grid-template-columns: 5fr 1fr 2fr 2fr 40px; /* all equal */
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #F2521C;
+    width: 100%;
+    box-sizing: border-box;
+    justify-items: left;
+    font-size: 18px;
+    font-weight: bold;
+    color: #013E3F;
+}
+
+
+
+/* Quantity box */
+.order-qty input {
+    width: 60px;
+    padding: 6px;
+    text-align: left;
+    font-size: 16px;
+    border: 2px solid #013E3F;
+    border-radius: 5px;
+}
+
+button.remove-btn {
+background-color: #056A6A;
+color: white;
+border: none;
+padding: 6px 10px;
+border-radius: 4px;
+cursor: pointer;
+font-size: 16px;
+}
+
+
+/* Delivery or Takeout section */
+.delivery-or-takeout {
+    display: grid;
+    grid-template-columns: 8fr 3fr; /* left area expands, right area aligns like totals */
+    align-items: start;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+.delivery-left {
+    display: flex;
+    align-items: left;
+    justify-content: flex-start;
+    gap: 15px;
+    flex-wrap: wrap;
+    text-align: left;
+    padding-right: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #013E3F;
+}
+
+.delivery-left input {
+    font-size: 10px;
+}
+
+/* NEW */
+.delivery-left label {
+    font-size: 16px; 
+    font-weight: normal;
+}
+
+.delivery-right {
+    text-align: left;
+    padding-right: 0px; /* same alignment as total row */
+    padding-left: 35px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #013E3F;
+}
+
+.order-empty-message{
+    display: none;
+    text-align: center;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+    color: #013E3F;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.total-section {
+    display: grid;
+    grid-template-columns: 8fr 3fr; /* all equal */
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 4px double #013E3F;
+    width: 100%;
+    box-sizing: border-box;
+    justify-items: left;
+    color: #013E3F;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#order-total-amount {
+    text-align: left;
+    padding-right: 0px; /* align with delivery/takeout right side */
+    padding-left: 35px;
+}
+
+
+.order-btnbox{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 30px auto;
+    width: 100%;
+    
+}
+
+#infosection{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  color:#013E3F;
+  font-size: large;
+  
+}
+
+#infosection label{
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+#infosection input,
+#infosection textarea {
+  border: 2px solid #013E3F;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 16px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+#infosection textarea{
+  height: 100px;
+}
+
+
+#addressbar{
+  width: 100%;
+}
+
+.order-btn {
+    display: block;
+    text-align: right;
+    align-self: flex-end;
+    background-color: #013E3F;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-size: 20px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.order-btn:hover {
+    color: hsl(23, 41%, 70%);
+    transform: scale(1.1);
+}
+
+/* Modal Section */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 85%;
+    max-width: 350px;
+}
+
+.modal-content h3{
+    margin-bottom: 15px;
+    color: #013E3F;
+    text-align: center;
+    font-size: 25px;
+}
+
+.modal-content input{
+    width: 95%;
+    padding: 10px;
+    font-size: 18px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+}
+
+.modal-content textarea {
+    font-size: 15px;          /* smaller text */
+    width: 100%;               /* same width as input */
+    height: 80px;             /* bigger box */
+    padding: 6px;             /* padding from top-left */
+    text-align: left;         /* left-align text */
+    vertical-align: top;      /* top-align text */
+    line-height: 1.4;         /* comfortable spacing */
+    resize: vertical;         /* user can resize vertically */
+    overflow-wrap: break-word; /* wrap long lines */
+    border-radius: 8px;
+    margin-bottom: 15px;       /* same spacing as inputs */
+    box-sizing: border-box;
+}
+
+.modal-buttons{
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* ============== Font , padding and gap sizes for responsive
+=============================================== */
+
+#to-order h2{
+    font-size: clamp(20px, 5vw, 40px);
+    padding-top: clamp(15px, 4vw, 30px);
+    padding-bottom: clamp(10px, 3vw, 20px);
+}
+
+/* Row headers */
+.order-row-header {
+  font-size: clamp(16px, 3vw, 25px);
+  gap: clamp(5px, 2vw, 10px);
+  padding: clamp(5px, 2vw, 10px) 0;
+}
+
+/* Order rows */
+.order-row {
+  font-size: clamp(14px, 2.5vw, 18px);
+  gap: clamp(5px, 2vw, 10px);
+  padding: clamp(5px, 2vw, 10px) 0;
+}
+
+/* Inputs */
+.order-qty input {
+  width: clamp(40px, 8vw, 60px);
+  padding: clamp(3px, 1vw, 6px);
+  font-size: clamp(12px, 2vw, 16px);
+}
+
+/* Buttons */
+.order-btn {
+  font-size: clamp(16px, 3vw, 20px);
+  padding: clamp(8px, 2vw, 12px) clamp(12px, 3vw, 20px);
+}
+
+button.remove-btn {
+  font-size: clamp(12px, 2.5vw, 16px);
+  padding: clamp(3px, 1vw, 6px) clamp(6px, 2vw, 10px);
+}
+.order-empty-message {
+  font-size: clamp(20px, 2vw, 25px);
+  margin: clamp(10px, 2vw, 20px) auto;
+}
+
+/* Delivery/Takeout section */
+.delivery-left {
+  font-size: clamp(14px, 2.5vw, 18px);
+  gap: clamp(8px, 2vw, 15px);
+}
+
+.delivery-left label {
+  font-size: clamp(12px, 2vw, 16px);
+}
+
+/* Totals */
+.total-section {
+  font-size: clamp(14px, 2.5vw, 20px);
+  gap: clamp(5px, 2vw, 10px);
+  padding: clamp(5px, 2vw, 10px) 0;
+}
+
+/* Modal */
+.modal-content h3 {
+  font-size: clamp(18px, 4vw, 25px);
+}
+
+.modal-content input {
+  font-size: clamp(14px, 3vw, 18px);
+  padding: clamp(6px, 2vw, 10px);
+}
+.modal-content {
+  width: clamp(70%, 10vw, 350px);
+}
+
+/* ===============Media Query Responsive =============== */
+@media(max-width: 900px){
+    #to-order h2{
+        font-size: 32px;
+    }
+
+    .order-row-header, .order-row{
+        grid-template-columns: 4fr 1fr 2fr 2fr 30px; /*shrink last column*/
+        font-size: 20px;
+    }
+
+    
+
+    .total-section{
+        grid-template-columns: 7fr 3fr; /*shrink last column*/
+        font-size: 18px;
+    }
+
+    .delivery-right{
+      padding-left: 15px;
+    }
+    .order-btn {
+        font-size: 18px;
+    }
+}
+
+@media(max-width: 600px){
+    main{
+        padding: 10px 10px;
+    }
+    #to-order h2{
+        font-size: 28px;
+        padding-top: 60px;
+        padding-bottom: 15px;
+    }
+
+    .order-row-header, .order-row{
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        font-size: 16px;
+        gap: 6px;
+    }
+
+    .delivery-or-takeout {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .delivery-left {
+        flex-direction: column; /* stack items vertically */
+        align-items: flex-start; /* align left */
+        gap: 8px;
+    }
+
+    .delivery-left strong {
+        width: 100%;  
+        margin-bottom: 5px;  /* spacing under header */
+    }
+
+    .delivery-left label {
+      display: block;     /* stacked display */
+      margin-left: 10px;  /* indentation */
+      font-size: clamp(12px, 2vw, 16px);
+  }
+
+    .delivery-left input[type="radio"] {
+      transform: scale(1);      /* reset */
+      width: auto;
+      height: auto;
+  }
+  .delivery-left label {
+      width: 100%;
+  }
+  .total-section {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .total-section strong,
+    #order-total-amount {
+        flex: 1 1 45%; /* two-column flexible */
+        padding-left: 0;
+    }
+  
+
+}
+
+/* For max-width: 400px */
+@media (max-width: 400px) {
+  #to-order{
+    padding: 10px 10px;
+  }
+
+  #to-order h2 {
+    font-size: 22px;
+    padding: 40px 0 10px 0;
+  }
+
+  .order-row-header{
+    display: none;
+  }
+  .order-row {
+    grid-template-columns: 2fr 1fr; /* stack everything vertically */
+    font-size: 14px;
+    padding-left: 20px; /* shift content to the right */
+  }
+
+   .order-row div:nth-child(3)
+   {
+    display: none; /* hide total & remove button for compact view */
+    }
+
+  .order-qty input {
+    width: 40px;
+    font-size: 14px;
+  }
+
+  .delivery-or-takeout {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 14px;
+  }
+
+  .delivery-left {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    .delivery-left label {
+        margin-left: 10px;
+    }
+
+ .total-section {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .total-section strong,
+    #order-total-amount {
+        flex: 1 1 100%;
+        width: 100%;
+        text-align: left;
+        padding-left: 0;
+    }
+
+  .order-btn {
+    font-size: 15px;
+    padding: 8px 12px;
+    width: 100%;
+  }
+
+  .modal-content {
+    width: 95%;
+    max-width: 280px;
+  }
+
+  .modal-content h3 {
+    font-size: 20px;
+  }
+
+  .modal-content input {
+    font-size: 16px;
+  }
+
+  .order-btnbox {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    margin: 10px 0;              /* no auto centering */
+    width: 100%;                 /* container spans full width */
+  }
+  .order-btn {
+    display: inline-block;       /* keep natural size */
+    text-align: center;     
+    font-size: 14px;
+    padding:8px 12px;
+    width: auto;
+  }
+}
+
+.order-confirmation{
+  text-align: center;
+  font-size: 30px;
+  color: #013E3F;
+  margin: 50px auto;
+  font-weight: bold;
+  font-style: oblique;
+}

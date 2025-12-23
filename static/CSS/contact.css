@@ -1,0 +1,113 @@
+/* Contact Page */
+main{
+    
+    min-height: calc(90vh - 100px); 
+    /* Adjust 140px depending on your header + footer total height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;  /* center vertically */
+
+}
+.container-email{
+    width: 90%;
+    max-width: 600px;
+    margin: 50px auto;
+    background: #F0E3DB;
+    padding-top: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+}
+.complain-email{
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    border-bottom: 2px solid #013E3F;
+    padding-bottom: 10px;
+    color:#013E3F;
+}
+
+
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color:#013E3F;
+}
+
+input, textarea {
+    width: 95%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: 1px solid hsl(181, 97%, 25%);
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+input:focus, textarea:focus {
+    border-color: #013E3F;
+    outline: none;
+    box-shadow: 0 0 5px rgba(1, 62, 63, 0.3);
+} 
+textarea {
+    height: 300px;
+    resize: none;
+}
+
+#send-button {
+    align-self: center;
+}
+
+.contact-phone {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #013E3F;
+}
+
+/* Tablet breakpoint */
+@media (max-width: 900px) {
+  /* Adjust layout for tablets */
+  
+}
+
+/* Large phone breakpoint */
+@media (max-width: 600px) {
+  /* Adjust layout for large phones */
+  .container-email{
+    width: 87%;
+    margin: 90px auto;
+  }
+}
+
+/* Small phone breakpoint */
+@media (max-width: 400px) {
+  /* Adjust layout for small phones */
+  .container-email{
+    width: 85%;
+    max-width: 550px;
+    margin: 90px auto;
+    background: #F0E3DB;
+    padding-top: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+    
+}
+    button{
+        font-size: 16px;
+    }
+    .contact-phone{
+        font-size: 16px;
+    }
+
+}

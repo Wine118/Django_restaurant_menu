@@ -1,0 +1,152 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Than Lwin Cafe</title>
+
+  <!-- Link to your stylesheet -->
+   <link rel="icon" type="image/png" href="{% static 'images/logo.png' %}"/>
+  <link rel="stylesheet" href="{% static 'CSS/style.css' %}" />
+  <link rel="stylesheet" href="{% static 'CSS/menu.css' %}" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+  <header>
+    <div class="logo-text">
+        <img src="{% static 'images/logo.png' %}" alt="Than Lwin Cafe Logo" class="logo-img">
+        THAN LWIN Cafe
+    </div>
+    <nav>
+        <a href="{% url 'index' %}">Home</a>
+        <a href="{% url 'menu' %}">Menu</a>
+        <a href="{% url 'index' %}">About</a>
+        <a href="{% url 'index' %}">Contact</a>
+    </nav>
+  </header>
+ 
+  <main>
+    <!-- Tea and Snack -->
+    {% for category in categories %}
+    <section class="category-menu" id="{{ category.name|slugify }}">
+      <h2>{{ category.name }}</h2>
+      <div class="items-row">
+        {% for dish in category.dishes.all %}
+        <div class="item-card" id="{{ dish.name | slugify }}">
+          <img src="{% static dish.image_path %}" alt="{{ dish.name }}" class="item-image">
+          <h3>{{ dish.name }}({{dish.burmese_name}})</h3>
+          <p>{{ dish.price }} MMK</p>
+          {% if dish.has_options %}
+           <button onclick="openMohingaOptions('{{ dish.name }}', {{ dish.price }})">Add</button>
+          {% else %}
+           <button onclick="addItem('{{ dish.name }}', {{ dish.price }})">Add</button>
+           {% endif %}
+        </div>
+        {% endfor %}     
+
+                
+      </div>
+    </section>
+    {% endfor %}
+
+    
+
+    <!-- ===========TO ORDER SECTION ===== -->
+    <section id="to-order">
+      <h2>Items to Order</h2>
+      <div class="order-row-header">
+
+          <div class="order-name-header">
+            Name of Dish
+          </div>
+
+          <div class="order-qty-header">
+            Qty
+          </div>
+
+          <div class="order-price-header">
+            Price
+          </div>
+
+          <div class="order-price-total-header">
+            Total
+          </div>
+
+          
+
+      </div>
+
+      <div id="order-list"> </div>
+
+      <div id="empty-message" class="empty-order-message">
+          Nothing is ordered yet.
+      </div>     
+
+      <div class="total-section">
+        <strong>Total: </strong>
+        <span id="total-amount">0 MMK</span>
+      </div>
+
+      <div class="order-btnbox">
+         <a href="{% url 'order' %}" class="order-btn">Order Now</a>
+      </div>    
+
+    </section>
+    
+    
+  </main>
+
+  <footer>
+        <span>@2025 Created by Maddyson.</span>
+  </footer>
+
+
+<!-- Mohinga Topping Model -->
+  <div id="mohingaModal" class="modal">
+      <div class="model-content">
+        <h2>Choose Toppings</h2>
+        <div class="toppingbox">
+          {% comment %} Render toppings dynamically later {% endcomment %}
+            <div class="topping-option">
+               <div>Fritter</div>
+               <div class="chk-wrapper">
+                  <input type="checkbox" value="300" class="mohinga-topping"> 
+                </div>              
+            </div>
+
+            <div class="topping-option">
+               <div>Fish Cake</div>
+               <div class="chk-wrapper">
+                  <input type="checkbox" value="500" class="mohinga-topping"> 
+                </div>              
+            </div>
+
+            <div class="topping-option">
+               <div>Oh Bae Ou(soup boiled egg)</div>
+               <div class="chk-wrapper">
+                  <input type="checkbox" value="1000" class="mohinga-topping"> 
+                </div>              
+            </div>
+
+            
+            
+        </div>
+        
+
+        <div class="modal-buttons">
+          <button onclick="addMohinga()">Add to Order</button>
+          <button onclick="closeMohingaOptions()">Cancel</button>
+        </div>
+      </div>
+  </div>
+
+  
+
+
+  <!-- Link to your JavaScript (defer ensures it runs after HTML is parsed) -->
+  <script defer src="{% static 'Javascript/menu.js' %}"></script>
+
+</body>
+</html>

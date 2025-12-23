@@ -1,0 +1,115 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Than Lwin Cafe</title>
+
+  <!-- Link to your stylesheet -->
+   <link rel="icon" type="image/png" href="{% static 'images/logo.png' %}"/>
+  <link rel="stylesheet" href="{% static 'CSS/style.css' %}" />
+  <link rel="stylesheet" href="{% static 'CSS/order.css' %}" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+  <header>
+    <div class="logo-text">
+        <img src="{% static 'images/logo.png' %}" alt="Than Lwin Cafe Logo" class="logo-img">
+        THAN LWIN Cafe
+    </div>
+    <nav>
+        <a href="{% url 'index' %}">Home</a>
+        <a href="{% url 'menu' %}">Menu</a>
+        <a href="{% url 'index' %}">About</a>
+        <a href="{% url 'contact' %}">Contact</a>
+    </nav>
+  </header>
+ 
+  <main> 
+    <!-- ===========TO ORDER SECTION ===== --> 
+   <section id="to-order">
+    <h2>Items to Order</h2>
+
+    <div class="order-row-header">
+      <div class="order-name">Name of Dish</div>
+      <div class="order-qty">Qty</div>
+      <div class="order-price">Price</div>
+      <div class="order-price-total">Total</div>
+    </div>
+
+  <div id="order-list"></div> 
+
+
+  <div class="order-empty-message">
+      Nothing is ordered yet.
+  </div>
+
+  <div class="delivery-or-takeout">  
+
+        <div class="delivery-left">
+            <strong>Delivery or Takeout:</strong>
+            <label><input type="radio" name="deliverytype" value="delivery"> Delivery (+1000 MMK)</label>
+            <label><input type="radio" name="deliverytype" value="takeout" checked> Takeout (0 MMK)</label>
+        </div>
+        
+        
+        <div class="delivery-right">
+            <span id="deliveryornot">0 MMK</span>
+        </div>
+        
+
+  </div>
+
+    <div class="total-section">
+      <strong>Total: </strong><div id="order-total-amount">0 MMK</div>
+    </div>
+
+    <div class="order-btnbox">
+      <div id="infosection">
+        <label for="nameInput">Name:</label>
+        <input type="text" id="nameInput" placeholder="Enter name..." maxlength="50">
+        <label for="phoneInput">Phone: </label>
+        <input type="tel" id="phoneInput" placeholder="Enter phone number" maxlength="11">
+        <div id="addressbar">
+          <label for="addressInput" >Address: </label>  
+          <textarea id="addressInput" placeholder="Enter address(only for delivery)"></textarea> 
+        </div>
+             
+      </div>
+      <button id="openAmountModal" class="order-btn">Order Now</button>
+    </div>
+   </section> 
+
+   <!-- Modal for entering amount -->
+    <div id="amountModal" class="modal">
+      <div class="modal-content">
+        <h3>Enter Amount to Pay</h3>
+        <input type="number" id="amountInput" placeholder="Enter amount..." min="0">
+
+        <div class="modal-buttons">
+          <button id="confirmAmount" class="confirm-btn">Confirm</button>
+          <button id="closeAmountModal" class="cancel-btn">Cancel</button>
+        </div>
+      </div>
+
+    </div>
+    
+  </main>
+
+  <footer>
+        <span>@2025 Created by Maddyson.</span>
+  </footer>
+
+
+
+  <script>
+    const CSRF_TOKEN = "{{ csrf_token }}"
+  </script>
+
+  <!-- Link to your JavaScript (defer ensures it runs after HTML is parsed) -->
+  <script defer src="{% static 'Javascript/order.js' %}"></script>
+
+</body>
+</html>
