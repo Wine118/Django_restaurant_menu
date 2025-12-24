@@ -22,8 +22,8 @@
     </div>
     <nav>
         <a href="{% url 'index' %}">Home</a>
-        <a href="{% url 'index' %}">Menu</a>
-        <a href="{% url 'index' %}">About</a>
+        <a href="{% url 'menu' %}">Menu</a>
+        <a href="{% url 'about' %}">About</a>
         <a href="{% url 'contact' %}">Contact</a>
     </nav>
   </header>
@@ -39,11 +39,14 @@
             <h2>"Today's Special Menu"</h2>
             <img id="special-img" src="{% static 'images/special/special1.jpg'%}" class="special-img" alt="Today's Special Dish">
             <h3>ကြက်ကုန်းဘောင်</h3>
-            <button  id="special-btn">Order</button>
+            <a href="{% url 'menu' %}#to-order">
+              <button  id="special-btn">Order</button>
+            </a>
+            
         </div>
         
     </div>
-    <a href="{%url 'index' %}" class="menu-btn">Go to Menu Page</a>
+    <a href="{%url 'menu' %}" class="menu-btn">Go to Menu Page</a>
 
     
   </main>

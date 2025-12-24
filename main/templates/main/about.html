@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
 <head>
@@ -6,23 +7,23 @@
   <title>Than Lwin Cafe</title>
 
   <!-- Link to your stylesheet -->
-   <link rel="icon" type="image/png" href="images/logo.png"/>
-  <link rel="stylesheet" href="CSS/style.css" />
-  <link rel="stylesheet" href="CSS/about.css" />
+   <link rel="icon" type="image/png" href="{% static 'images/logo.png' %}"/>
+  <link rel="stylesheet" href="{% static 'CSS/style.css' %}" />
+  <link rel="stylesheet" href="{% static 'CSS/about.css' %}" />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;700&display=swap" rel="stylesheet">
 
 </head>
 <body>
   <header>
     <div class="logo-text">
-        <img src="images/logo.png" alt="Than Lwin Cafe Logo" class="logo-img">
+        <img src="{% static 'images/logo.png' %}" alt="Than Lwin Cafe Logo" class="logo-img">
         THAN LWIN Cafe
     </div>
     <nav>
-        <a href="index.html">Home</a>
-        <a href="menu.html">Menu</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
+        <a href="{% url 'index' %}">Home</a>
+        <a href="{% url 'menu' %}">Menu</a>
+        <a href="{% url 'about' %}">About</a>
+        <a href="{% url 'contact' %}">Contact</a>
     </nav>
   </header>
  
@@ -71,7 +72,7 @@
 
 
   <!-- Link to your JavaScript (defer ensures it runs after HTML is parsed) -->
-  <script defer src="Javascript/order.js"></script>
+  <script defer src="{% static 'Javascript/order.js' %}"></script>
 
 </body>
 </html>

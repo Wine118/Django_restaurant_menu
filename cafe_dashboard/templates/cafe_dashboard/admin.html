@@ -1,0 +1,224 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Dashboard - Than Lwin Cafe</title>
+
+  <!-- Link to your stylesheet -->
+  <link rel="icon" type="image/png" href="{% static 'images/logo.png' %}"/>
+  <link rel="stylesheet" href="{% static 'CSS/style.css' %}" />
+  <link rel="stylesheet" href="{% static 'CSS/admin.css' %}" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+  <header>
+    <div class="logo-text">
+        <img src="{% static 'images/logo.png' %}" alt="Than Lwin Cafe Logo" class="logo-img">
+        THAN LWIN Cafe - Admin Dashboard
+    </div>
+    <nav>
+        <a href="#special-dish">Dashboard</a>
+        <a href="#orders">Orders</a>
+        <a href="#complaints">Complaints</a>
+        <a href="#">Logout</a>
+    </nav>
+  </header>
+ 
+  <main> 
+    <!-- ===== Today's Special ====== -->
+    <section class="special-dish" id="special-dish">
+      <h2>Today's Special</h2>
+      <form class="special-form" id="specialForm">
+        <div class="form-top">
+          <input id="dishName" type="text" placeholder = "Dish Name">
+          <input type="file" id="folderUpload" webkitdirectory directory multiple>
+        </div>        
+        <button type="submit">Upload</button>
+      </form>
+
+      <div class="special-preview">
+        <div class="preview-row">
+          <button id="prevBtn">&lt;</button>
+          <img id="previewImg" src="{% static 'images/special/special1.jpg' %}" alt="Dish Photo">
+          <button id="nextBtn">&gt;</button>
+        </div>
+        
+        <p id="previewName">Mohinga (Medium)</p>
+      </div>
+    </section>
+
+    <!-- ===== Orders Table ===== -->
+     <section class="orders" id="orders">
+        <h2>Customer Orders</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Items</th>
+              <th>Qty</th>
+              <th>Price</th>
+              <th>Total</th>
+              <th>All Total</th>
+              <th>Processed</th>
+              <th>Phoned or Delivered</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- ORDER 1 with 3 items -->
+             <!-- Row 1 -->
+              <tr>
+                <td rowspan="3">1</td>
+                <td rowspan="3">U Aung</td>
+                <td rowspan="3">09-12345678</td>
+                <td>Mohinga (Medium)</td>
+                <td>2</td>
+                <td>1500 MMK</td>
+                <td>3000 MMK</td>
+
+                <!-- Total for All 3 items -->
+                <td rowspan="3">4500 MMK</td>
+                <td rowspan="3"><input type="checkbox"></td>
+                <td rowspan="3"><input type="checkbox">To Phone</td>
+              </tr>
+              <!-- Row 2 -->
+               <tr>
+                <td>Shan Noodles</td>
+                <td>1</td>
+                <td>2000 MMK</td>
+                <td>2000 MMK</td>
+               </tr>
+               <!-- Row 3 -->
+                <tr>
+                  <td>Tea</td>
+                  <td>1</td>
+                  <td>1000 MMK</td>
+                  <td>1000 MMK</td>
+                </tr>
+
+                <!-- Order 2 with 2 items -->
+                <tr>
+                  <td rowspan="2">2</td>
+                  <td rowspan="2">Ma Su</td>
+                  <td rowspan="2">0998765432</td>
+                  <td>Ohm Nok Kauk Swe</td>
+                  <td>1</td>
+                  <td>1200 MMK</td>
+                  <td>1200 MMK</td>
+
+                  <td rowspan="2">2000 MMK</td>
+                  <td rowspan="2"><input type="checkbox"></td>
+                  <td rowspan="2"><input type="checkbox">To Deliver</td>
+                </tr>
+
+                <tr>
+                    <td>Lemon Tea</td>
+                    <td>1</td>
+                    <td>800 MMK</td>
+                    <td>800 MMK</td>
+                </tr>
+
+                <!-- Order 3 with 4 rows -->
+                 <!-- row 1 -->
+                <tr>
+                 <td rowspan="4">3</td>
+                 <td rowspan="4">Daw Mein</td>
+                 <td rowspan="4">09-2242534</td>
+                 <td >Shan Noodle</td>
+                 <td >1</td>
+                 <td >3000 MMK</td>
+                 <td> 3000 MMK</td>
+                 <td rowspan="4">21000 MMK</td>
+                 <td rowspan="4"><input type="checkbox"></td>
+                 <td rowspan="4"><input type="checkbox">To Deliver</td>
+                </tr>
+                 <!-- row 2 -->
+                <tr>
+                <td >Tofu Nway</td>
+                 <td >3</td>
+                 <td >3000 MMK</td>
+                 <td> 9000 MMK</td>
+                </tr>
+                <tr>
+                 <td >Tea</td>
+                 <td >4</td>
+                 <td >1000 MMK</td>
+                 <td> 4000 MMK</td>
+                </tr>
+                <tr>
+                 <td >Nan Pyar</td>
+                 <td >5</td>
+                 <td >1000 MMK</td>
+                 <td> 5000 MMK</td>
+                </tr>
+
+              
+          </tbody>
+        </table>
+     </section>
+     
+     <section class="complaints" id="complaints">
+        <h2>Customer Complaints</h2>
+          <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Customer Name</th>
+              <th>Phone Number</th>
+              <th>Message</th>
+              <th>Read</th>
+              <th>Serious Level</th>
+              <th>Created At</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>U Aung</td>
+              <td>0912345678</td>
+              <td>Food was cold</td>
+              <td><input type="checkbox" checked></td>
+              <td>High</td>
+              <td>2025-12-08 10:30</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Ma Su</td>
+              <td>0998765432</td>
+              <td>Delivery took too long</td>
+              <td><input type="checkbox"></td>
+              <td>Medium</td>
+              <td>2025-12-08 12:15</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Ko Zaw</td>
+              <td>0923456789</td>
+              <td>Wrong item delivered</td>
+              <td><input type="checkbox"></td>
+              <td>High</td>
+              <td>2025-12-08 14:50</td>
+            </tr>
+          </tbody>
+        </table>
+</section>
+
+  </main>
+
+  <footer>
+        <span>@2025 Created by Maddyson.</span>
+  </footer>
+
+
+
+
+
+  <!-- Link to your JavaScript (defer ensures it runs after HTML is parsed) -->
+  <script defer src="{% static 'Javascript/admin.js' %}"></script>
+
+</body>
+</html>

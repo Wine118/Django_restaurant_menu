@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'main',
     'complaints',
     'menu',
+    'cafe_dashboard',
+    
 ]
 
 MIDDLEWARE = [

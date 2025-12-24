@@ -22,5 +22,9 @@ urlpatterns = [
     path('', include('main.urls')),   # include your app routes
     path('complaints/', include('complaints.urls')),
     path('menu/',include('menu.urls')),
+    path('cafedashboard/',include('cafe_dashboard.urls')),
+
+    # Django built-in authentication URLs
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
 

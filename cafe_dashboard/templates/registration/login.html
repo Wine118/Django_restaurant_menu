@@ -1,0 +1,63 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Dashboard - Than Lwin Cafe</title>
+
+  <!-- Link to your stylesheet -->
+  <link rel="icon" type="image/png" href="{% static 'images/logo.png' %}"/>
+  <link rel="stylesheet" href="{% static 'CSS/style.css' %}" />
+  <link rel="stylesheet" href="{% static 'CSS/admin.css' %}" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+  <header>
+    <div class="logo-text">
+        <img src="{% static 'images/logo.png' %}" alt="Than Lwin Cafe Logo" class="logo-img">
+        THAN LWIN Cafe - Admin Dashboard
+    </div>
+    <nav>
+        <a href="#special-dish">Dashboard</a>
+        <a href="#orders">Orders</a>
+        <a href="#complaints">Complaints</a>
+        <a href="#">Logout</a>
+    </nav>
+  </header>
+ 
+  <main>
+    <section id="login-section">
+        <div class="login-wrapper">
+            <h2>Admin Login</h2>
+            <form method="post" class="special-form">
+                {% csrf_token %}
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+        <!-- Optional: error messages -->
+        {% if form.errors %}
+            <div class="special-preview">
+                <p style="color:red;">Invalid username or password. Please try again.</p>
+            </div>
+        {% endif %}
+    </section>
+</main>
+
+
+  <footer>
+        <span>@2025 Created by Maddyson.</span>
+  </footer>
+
+
+
+
+
+  <!-- Link to your JavaScript (defer ensures it runs after HTML is parsed) -->
+  <script defer src="{% static 'Javascript/admin.js' %}"></script>
+
+</body>
+</html>

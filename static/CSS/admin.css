@@ -125,3 +125,66 @@ input[type="checkbox"]{
     height: 18px;
     cursor: pointer;
 }
+
+
+/* ===== Login Section ===== */
+#login-section {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;       /* width of the login box */
+    margin: 0 auto;         /* center horizontally on page */
+    text-align: left;     /* heading is centered */
+}
+
+#login-section .login-wrapper {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+#login-section h2 {
+    text-align: center;   /* heading remains centered */
+    margin-bottom: 20px;
+}
+
+/* form wrapper under the heading */
+#login-section .special-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;      /* keep inputs left-aligned */
+    gap: 10px;
+    margin-left: 20px;           /* shift form 200px to the right */
+}
+
+/* Keep inputs same size */
+#login-section .special-form input[type="text"],
+#login-section .special-form input[type="password"] {
+    width: 300px;   /* same as before */
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: 1px solid #013E3F;
+    box-sizing: border-box;
+}
+
+/* Button styling */
+#login-section .special-form button {
+    margin-top: 10px;
+    background: #013E3F;
+    color: #F0E3DB;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+#login-section .special-form button:hover {
+    background: hsl(181, 97%, 23%);
+}
+
+
+
+
+
+
