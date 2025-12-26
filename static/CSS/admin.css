@@ -126,6 +126,22 @@ input[type="checkbox"]{
     cursor: pointer;
 }
 
+/* Selected date in complaints section */
+.complaints button {
+    font-size: 16px;
+    width: 50px;
+    height: 30px;
+    margin-top: 5px;
+    padding: 3px 5px;
+}
+
+/* Complaints section form aligned right */
+.complaints #select_date {
+    display: flex;              /* keep label + input + button inline */
+    justify-content: flex-end;  /* push them to the right */
+    gap: 10px;                  /* spacing between elements */
+    margin-bottom: 15px;        /* keep your existing spacing */
+}
 
 /* ===== Login Section ===== */
 #login-section {
