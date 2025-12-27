@@ -1,0 +1,43 @@
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Customer Name</th>
+      <th>Phone Number</th>
+      <th>Message</th>
+      <th>Read</th>
+      <th>Serious Level</th>
+      <th>Created At</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for complaint in complaints %}
+    <tr>
+      <td>{{ complaint.id }}</td>
+      <td>{{ complaint.customer_name }}</td>
+      <td>{{ complaint.phone_number }}</td>
+      <td>{{ complaint.message }}</td>
+      <td>
+        <input type="checkbox"
+               class="read-checkbox"
+               data-id="{{ complaint.id }}"
+               {% if complaint.read %}checked{% endif %}>
+      </td>
+      <td>{{ complaint.get_serious_level_display }}</td>
+      <td>{{ complaint.created_at|date:"Y-m-d H:i" }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<div class="pagination">
+  {% if complaints.has_previous %}
+    <button data-page="{{ complaints.previous_page_number }}">&lt;</button>
+  {% endif %}
+
+  <span>Page {{ complaints.number }} of {{ complaints.paginator.num_pages }}</span>
+
+  {% if complaints.has_next %}
+    <button data-page="{{ complaints.next_page_number }}">&gt;</button>
+  {% endif %}
+</div>
