@@ -3,7 +3,7 @@ html {
 }
 
 main{
-    padding: 20px;
+    padding: 10px;
     max-width: 1200px;
     margin: auto;
     display: flex;
@@ -14,7 +14,7 @@ main{
 
 section{
     text-align: center;
-    padding: 30px 5px;
+    padding: 10px 5px;
 }
 
 section h2 {
@@ -136,7 +136,7 @@ input[type="checkbox"]{
     top: 0;
     background: #F0E3DB;
     z-index: 10;
-    padding-top: 40px;
+    padding-top: 10px;
 }
 
 #complaints-container {

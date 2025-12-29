@@ -1,43 +1,43 @@
 from django.shortcuts import render 
 from django.core.paginator import Paginator 
 from complaints.models import CustomerComplaint
-from datetime import datetime
+from django.utils import timezone
+from datetime import datetime, time
 from django.contrib.auth.decorators import login_required  
 
 # Create your views here.
 @login_required
-def dashboard(request):
-    complaints = CustomerComplaint.objects.all().order_by('-created_at')
-    
-    # Date filter (from calendar input)
-    selected_date = request.GET.get('date')
+def admin_dashboard(request):
+    return render(request, "cafe_dashboard/admin_dashboard.html")
+
+@login_required
+def admin_orders(request):
+    return render(request, "cafe_dashboard/admin_orders.html")
+
+
+@login_required
+def admin_complaints(request):
+    complaints_qs = CustomerComplaint.objects.all()
+    selected_date = request.GET.get("date")
+
     if selected_date:
-        complaints = complaints.filter(
-            created_at__date = selected_date
-        )
+        
+        selected_date = datetime.strptime(selected_date, "%Y-%m-%d").date()
+        start = timezone.make_aware(datetime.combine(selected_date, time.min))
+        end = timezone.make_aware(datetime.combine(selected_date, time.max))
 
-    # Pagination (20 per page)
-    paginator = Paginator(complaints, 10)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    
+        complaints_qs = complaints_qs.filter(created_at__range=(start, end))
 
-    context = {
-        'complaints' : page_obj,
-        'selected_date' : selected_date
-    }
-    return render(request, 'cafe_dashboard/admin.html',context)
+    complaints_qs = complaints_qs.order_by("-created_at")
 
-
-def complaints_partial(request):
-    page_number = request.GET.get("page", 1)
-
-    complaints_qs = CustomerComplaint.objects.order_by("-created_at")
     paginator = Paginator(complaints_qs, 10)
-    complaints = paginator.get_page(page_number)
+    page_obj = paginator.get_page(request.GET.get("page"))
 
     return render(
         request,
-        "cafe_dashboard/_complaints_table.html",
-        {"complaints": complaints}
+        "cafe_dashboard/admin_complaints.html",
+        {
+            "complaints": page_obj,
+            "selected_date": request.GET.get("date"),
+        }
     )

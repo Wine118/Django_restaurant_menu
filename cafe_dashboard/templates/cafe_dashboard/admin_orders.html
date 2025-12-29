@@ -1,0 +1,121 @@
+
+{% extends "cafe_dashboard/admin_base.html" %}
+{% load static %}
+{% block content %}
+
+    <!-- ===== Orders Table ===== -->
+     <section class="orders" id="orders">
+        <h2>Customer Orders</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Items</th>
+              <th>Qty</th>
+              <th>Price</th>
+              <th>Total</th>
+              <th>All Total</th>
+              <th>Processed</th>
+              <th>Phoned or Delivered</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- ORDER 1 with 3 items -->
+             <!-- Row 1 -->
+              <tr>
+                <td rowspan="3">1</td>
+                <td rowspan="3">U Aung</td>
+                <td rowspan="3">09-12345678</td>
+                <td>Mohinga (Medium)</td>
+                <td>2</td>
+                <td>1500 MMK</td>
+                <td>3000 MMK</td>
+
+                <!-- Total for All 3 items -->
+                <td rowspan="3">4500 MMK</td>
+                <td rowspan="3"><input type="checkbox"></td>
+                <td rowspan="3"><input type="checkbox">To Phone</td>
+              </tr>
+              <!-- Row 2 -->
+               <tr>
+                <td>Shan Noodles</td>
+                <td>1</td>
+                <td>2000 MMK</td>
+                <td>2000 MMK</td>
+               </tr>
+               <!-- Row 3 -->
+                <tr>
+                  <td>Tea</td>
+                  <td>1</td>
+                  <td>1000 MMK</td>
+                  <td>1000 MMK</td>
+                </tr>
+
+                <!-- Order 2 with 2 items -->
+                <tr>
+                  <td rowspan="2">2</td>
+                  <td rowspan="2">Ma Su</td>
+                  <td rowspan="2">0998765432</td>
+                  <td>Ohm Nok Kauk Swe</td>
+                  <td>1</td>
+                  <td>1200 MMK</td>
+                  <td>1200 MMK</td>
+
+                  <td rowspan="2">2000 MMK</td>
+                  <td rowspan="2"><input type="checkbox"></td>
+                  <td rowspan="2"><input type="checkbox">To Deliver</td>
+                </tr>
+
+                <tr>
+                    <td>Lemon Tea</td>
+                    <td>1</td>
+                    <td>800 MMK</td>
+                    <td>800 MMK</td>
+                </tr>
+
+                <!-- Order 3 with 4 rows -->
+                 <!-- row 1 -->
+                <tr>
+                 <td rowspan="4">3</td>
+                 <td rowspan="4">Daw Mein</td>
+                 <td rowspan="4">09-2242534</td>
+                 <td >Shan Noodle</td>
+                 <td >1</td>
+                 <td >3000 MMK</td>
+                 <td> 3000 MMK</td>
+                 <td rowspan="4">21000 MMK</td>
+                 <td rowspan="4"><input type="checkbox"></td>
+                 <td rowspan="4"><input type="checkbox">To Deliver</td>
+                </tr>
+                 <!-- row 2 -->
+                <tr>
+                <td >Tofu Nway</td>
+                 <td >3</td>
+                 <td >3000 MMK</td>
+                 <td> 9000 MMK</td>
+                </tr>
+                <tr>
+                 <td >Tea</td>
+                 <td >4</td>
+                 <td >1000 MMK</td>
+                 <td> 4000 MMK</td>
+                </tr>
+                <tr>
+                 <td >Nan Pyar</td>
+                 <td >5</td>
+                 <td >1000 MMK</td>
+                 <td> 5000 MMK</td>
+                </tr>
+
+              
+          </tbody>
+        </table>
+     </section>
+     
+{% endblock %}
+
+{% block extra_js %}
+<script defer src="{% static 'Javascript/admin_order.js' %}"></script>
+{% endblock %}

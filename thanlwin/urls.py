@@ -24,6 +24,7 @@ urlpatterns = [
     path('menu/',include('menu.urls')),
     path('cafedashboard/',include('cafe_dashboard.urls')),
 
+
     # Django built-in authentication URLs
     path('accounts/', include('django.contrib.auth.urls')),
 ]

@@ -1,0 +1,55 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Dashboard - Than Lwin Cafe</title>
+
+  <!-- Link to your stylesheet -->
+  <link rel="icon" type="image/png" href="{% static 'images/logo.png' %}"/>
+  <link rel="stylesheet" href="{% static 'CSS/style.css' %}" />
+  <link rel="stylesheet" href="{% static 'CSS/admin.css' %}" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+  <header>
+    <div class="logo-text">
+        <img src="{% static 'images/logo.png' %}" alt="Than Lwin Cafe Logo" class="logo-img">
+        THAN LWIN Cafe - Admin Dashboard
+    </div>
+    <nav>
+        <a href="{% url 'cafe_dashboard' %}">Dashboard</a>
+        <a href="{% url 'cafe_orders' %}">Orders</a>
+        <a href="{% url 'cafe_complaints' %}">Complaints</a>
+        <a href="{% url 'logout' %}">Logout</a>
+    </nav>
+  </header>
+ 
+  <main> 
+   
+
+    {% block content %}{% endblock %}
+
+    <form id="csrf-form">
+        {% csrf_token %}
+  </form>
+
+  </main>
+
+  <footer>
+        <span>@2025 Created by Maddyson.</span>
+  </footer>
+  
+
+
+
+
+
+  <!-- Link to your JavaScript (defer ensures it runs after HTML is parsed) -->
+  <!-- Page-specific JS -->
+  {% block extra_js %}{% endblock %}
+
+</body>
+</html>

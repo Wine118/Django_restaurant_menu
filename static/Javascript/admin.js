@@ -7,31 +7,9 @@ const form = document.querySelector('.special-form');
 let images = [];
 let currentIndex = 0;
 
-window.addEventListener("beforeunload", () => {
-        localStorage.setItem("scrollY", window.scrollY);
-});
 
-window.addEventListener("load", () => {
 
-    const y = localStorage.getItem("scrollY");
-    if (y) window.scrollTo(0, y);
-});
 
-document.addEventListener("click", function (e) {
-    if (e.target.matches(".pagination button")) {
-        const page = e.target.dataset.page;
-
-        fetch(`/cafedashboard/partial/?page=${page}`)
-            .then(response => response.text())
-            .then(html => {
-                document.getElementById("complaints-container").innerHTML = html;
-
-                // Keep complaints perfectly in view
-                document.getElementById("complaints")
-                    .scrollIntoView({ behavior: "auto" });
-            });
-    }
-});
 
 
 // When folder selected
@@ -87,28 +65,6 @@ document.getElementById('nextBtn').onclick = () => {
     if(currentIndex < images.length - 1) loadImage(currentIndex + 1);
 };
 
-document.addEventListener("DOMContentLoaded", function(){
-    document.querySelectorAll(".read-checkbox").forEach(checkbox => {
-        checkbox.addEventListener("change", function() {
-            const complaintId = this.dataset.id;
-            const isRead = this.checked;
 
-            fetch(`/complaints/toggle-read/`, {
-                method: "POST",
-                headers: {
-                    "Content-Type" : "application/json",
-                    "X-CSRFToken" : getCSRFToken()
-                },
-                body: JSON.stringify({
-                    id: complaintId,
-                    read: isRead
-                })
-            });
-        });
-    });
-});
 
-function getCSRFToken() {
-    return document.querySelector('[name=csrfmiddlewaretoken]').value;
-}
 
