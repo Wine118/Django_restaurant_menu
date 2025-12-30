@@ -4,7 +4,7 @@ html {
 
 main{
     padding: 10px;
-    max-width: 1200px;
+    max-width: 1600px;
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -12,7 +12,21 @@ main{
     margin-bottom: 30px;
 }
 
-section{
+.complaints,.special-dish{
+    text-align: center;
+    align-self: center;
+    padding: 10px 5px;
+    max-width: 1200px;
+}
+
+.special-dish{
+    text-align: center;
+    
+    padding: 10px 5px;
+    
+}
+
+.orders{
     text-align: center;
     padding: 10px 5px;
 }
@@ -154,7 +168,8 @@ input[type="checkbox"]{
 }
 
 /* Complaints section form aligned right */
-.complaints #select_date {
+.complaints #select_date,
+.orders #select_date {
     display: flex;              /* keep label + input + button inline */
     justify-content: flex-end;  /* push them to the right */
     gap: 10px;                  /* spacing between elements */

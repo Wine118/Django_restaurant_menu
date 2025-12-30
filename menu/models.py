@@ -40,7 +40,7 @@ class Order(models.Model):
     ]
 
     customer_name = models.CharField(max_length=50)
-    phone = models.CharField(max_length=20)
+    phone = models.CharField(max_length=30)
     address = models.TextField(blank=True)
 
     delivery_type = models.CharField(
@@ -67,6 +67,10 @@ class OrderItem(models.Model):
     dish_name = models.CharField(max_length=100)
     price = models.IntegerField()
     quantity = models.IntegerField()
+
+    @property
+    def total_price(self):
+        return self.price * self.quantity
 
     def __str__(self):
         return f"{self.dish_name} x {self.quantity}"

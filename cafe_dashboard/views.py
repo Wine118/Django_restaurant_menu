@@ -1,6 +1,7 @@
 from django.shortcuts import render 
 from django.core.paginator import Paginator 
 from complaints.models import CustomerComplaint
+from menu.models import Order
 from django.utils import timezone
 from datetime import datetime, time
 from django.contrib.auth.decorators import login_required  
@@ -9,10 +10,6 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def admin_dashboard(request):
     return render(request, "cafe_dashboard/admin_dashboard.html")
-
-@login_required
-def admin_orders(request):
-    return render(request, "cafe_dashboard/admin_orders.html")
 
 
 @login_required
@@ -40,4 +37,15 @@ def admin_complaints(request):
             "complaints": page_obj,
             "selected_date": request.GET.get("date"),
         }
+    )
+
+
+@login_required
+def admin_orders(request):
+    orders = Order.objects.prefetch_related("items").order_by("-created_at")
+
+    return render(
+        request,
+        "cafe_dashboard/admin_orders.html",
+        {"orders":orders}
     )
