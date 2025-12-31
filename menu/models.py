@@ -53,6 +53,10 @@ class Order(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
 
+    # New fields
+    processed = models.BooleanField(default=False)
+    phoned_delivered = models.BooleanField(default=False)
+
     def __str__(self):
         return f"Order #{self.id} - {self.customer_name}"
 

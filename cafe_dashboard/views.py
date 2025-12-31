@@ -42,10 +42,37 @@ def admin_complaints(request):
 
 @login_required
 def admin_orders(request):
-    orders = Order.objects.prefetch_related("items").order_by("-created_at")
+    orders_qs = Order.objects.prefetch_related("items")
+
+    selected_date = request.GET.get("date")
+
+    if selected_date:
+        # Selected specific day
+        selected_date = datetime.strptime(selected_date, "%Y-%m-%d").date()
+    else:
+        # Default -> today
+        selected_date = timezone.localdate()
+
+    start = timezone.make_aware(datetime.combine(selected_date, time.min))
+    end = timezone.make_aware(datetime.combine(selected_date, time.max))
+    # only orders from that day
+    orders_qs = orders_qs.filter(created_at__range=(start, end)) 
+    
+    
+
+    # Newest first
+    orders_qs = orders_qs.order_by("-created_at")
+
+    paginator = Paginator(orders_qs, 10)
+    page_obj = paginator.get_page(request.GET.get("page"))
+
 
     return render(
         request,
         "cafe_dashboard/admin_orders.html",
-        {"orders":orders}
+        {
+            "orders":page_obj,
+            "selected_date":selected_date.strftime("%Y-%m-%d"),
+        
+        }
     )

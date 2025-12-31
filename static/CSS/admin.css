@@ -159,7 +159,8 @@ input[type="checkbox"]{
 
 
 
-.complaints button {
+.complaints button,
+.orders button {
     font-size: 16px;
     width: 50px;
     height: 30px;

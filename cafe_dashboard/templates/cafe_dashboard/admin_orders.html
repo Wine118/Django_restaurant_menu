@@ -9,51 +9,85 @@
           <input type="date" name="date" value="{{ selected_date }}">
           <button type="submit">Filter</button>
         </form>
-        <table>
-          <thead>
-            <tr>
-              <th>Order ID</th>
-              <th>Name</th>
-              <th>Phone</th>
-              <th>Address</th>
-              <th>Item</th>
-              <th>Qty</th>
-              <th>Price</th>
-              <th>Total</th>
-              <th>All Total</th>
-              <th>Processed</th>
-              <th>Phoned/Delivered</th>
-            </tr>
-          </thead>
-          <tbody>
-             {% for order in orders %}
-               {% for item in order.items.all %}
-               <tr>
-                {% if forloop.first %}
-                   <td rowspan="{{ order.items.count }}">{{ order.id }}</td>
-                   <td rowspan="{{ order.items.count }}">{{ order.customer_name }}</td>
-                   <td rowspan="{{ order.items.count }}">{{ order.phone }}</td>
-                   <td rowspan="{{ order.items.count }}">{{ order.address|default:"—"}}</td>
-                {% endif %}
+        <div id="orders-container" clas="orders-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Item</th>
+                <th>Qty</th>
+                <th>Price</th>
+                <th>Total</th>
+                <th>All Total</th>
+                <th>Processed</th>
+                <th>Phoned/Delivered</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for order in orders %}
+                {% for item in order.items.all %}
+                <tr>
+                  {% if forloop.first %}
+                    <td rowspan="{{ order.items.count }}">{{ order.id }}</td>
+                    <td rowspan="{{ order.items.count }}">{{ order.customer_name }}</td>
+                    <td rowspan="{{ order.items.count }}">{{ order.phone }}</td>
+                    <td rowspan="{{ order.items.count }}">{{ order.address|default:"—"}}</td>
+                  {% endif %}
 
-                <td>{{ item.dish_name }}</td>
-                <td>{{ item.quantity }}</td>
-                <td>{{ item.price }} MMK</td>
-                <td>{{ item.total_price }} MMK</td>
+                  <td>{{ item.dish_name }}</td>
+                  <td>{{ item.quantity }}</td>
+                  <td>{{ item.price }} MMK</td>
+                  <td>{{ item.total_price }} MMK</td>
 
-                {% if forloop.first %}
-                  <td rowspan="{{ order.items.count }}">{{ order.total_amount }} MMK</td>
-                  <td rowspan="{{ order.items.count }}"><input type="checkbox"></td>
-                  <td rowspan="{{order.items.count}}"><input type="checkbox"></td>
-                {% endif %}
-               </tr>
-               {% endfor %}
-              {% endfor %}
-              
+                  {% if forloop.first %}
+                    <td rowspan="{{ order.items.count }}">{{ order.total_amount }} MMK</td>
+                    <td rowspan="{{ order.items.count }}">
+                      <input type="checkbox"
+                              class="processed-checkbox"
+                              data-id="{{ order.id }}"
+                              {% if order.processed %}checked{% endif %}
+                      >
+                    </td>
+                    <td rowspan="{{order.items.count}}">
+                      <input type="checkbox"
+                             class="phoned-checkbox"
+                            data-id="{{ order.id }}"
+                            {% if order.phoned_delivered %}checked{% endif %}
+                      >
+                    </td>
+                  {% endif %}
+                </tr>
+                {% endfor %}
+                {% empty %}
+                <tr>
+                    <td colspan="11" style="text-align:center;">No Orders found.</td>
+                </tr>
+                {% endfor %}             
 
-              
-          </tbody>
-        </table>
+                
+            </tbody>
+          </table>
+        
+
+        <!-- Pagination -->
+            <div class="pagination" {% if selected_date %}data-date="{{ selected_date }}"{% endif %} style="margin-top: 10px;">
+               {% if orders.has_previous %}
+               <button type="button" data-page="{{ orders.previous_page_number }}">&lt;</button>
+               {% endif %}
+
+               <span>
+               Page {{ orders.number }} of {{ orders.paginator.num_pages }}
+               </span>
+
+               {% if orders.has_next %}
+               <button type="button" data-page="{{ orders.next_page_number }}">&gt;</button>
+               {% endif %}
+            </div>
+        </div>
+
      </section>
      
 {% endblock %}
