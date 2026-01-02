@@ -1,10 +1,14 @@
 from django.shortcuts import render 
 from django.core.paginator import Paginator 
 from complaints.models import CustomerComplaint
-from menu.models import Order
+from menu.models import Order, Dish
 from django.utils import timezone
 from datetime import datetime, time
-from django.contrib.auth.decorators import login_required  
+from django.contrib.auth.decorators import login_required 
+from django.http import JsonResponse
+from django.db.models import Q
+
+
 
 # Create your views here.
 @login_required
@@ -75,4 +79,26 @@ def admin_orders(request):
             "selected_date":selected_date.strftime("%Y-%m-%d"),
         
         }
+    )
+
+
+def dish_suggestions(request):
+    q = request.GET.get("q","").strip()
+    if not q:
+        return JsonResponse([], safe=False)
+
+    dishes = Dish.objects.filter(
+        Q(name__icontains=q) | Q(burmese_name__icontains=q)
+    )[:10]
+    # Send both id, name and burmese_name
+    data = [
+        {
+            "id": dish.id,
+            "name": dish.name,
+            "burmese_name": dish.burmese_name
+        } for dish in dishes
+    ]
+    return JsonResponse(
+        data
+        ,safe=False
     )

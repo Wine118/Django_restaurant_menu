@@ -2,9 +2,9 @@ html {
     scroll-behavior: smooth;
 }
 
-main{
-    padding: 10px;
-    max-width: 1600px;
+main {
+    padding: 20px;
+    max-width: 1200px;
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -12,24 +12,14 @@ main{
     margin-bottom: 30px;
 }
 
-.complaints,.special-dish{
+section {
     text-align: center;
-    align-self: center;
-    padding: 10px 5px;
-    max-width: 1200px;
+    padding: 30px 5px;
 }
 
-.special-dish{
-    text-align: center;
-    
-    padding: 10px 5px;
-    
-}
 
-.orders{
-    text-align: center;
-    padding: 10px 5px;
-}
+
+
 
 section h2 {
     font-size: 2em;
@@ -46,9 +36,44 @@ section h2 {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 10px;
+    gap: 10px;   
     
-    
+}
+/* Suggestions dropdown */
+#specialForm {
+    position: relative; /* Make it relative so suggestions can position absolutely */
+}
+
+#suggestions {
+    display: none;
+    list-style: none;           /* Remove bullets */
+    margin: 0;
+    padding: 0;
+    position: absolute;         /* Position below input */
+    top: 40px;                  /* Adjust based on input height */
+    left: 0;
+    width: 30%;                /* same width as input container */
+    margin-left: 30%;
+    background-color: white;    /* white background */
+    border: 1px solid #ccc;     /* subtle border */
+    border-radius: 4px;
+    max-height: 200px;          /* limit height */
+    overflow-y: auto;           /* scroll if too tall */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    z-index: 1000;              /* appear above other elements */
+}
+
+#suggestions li {
+    text-align: left;        /* left align the text */
+    font-size: 14px;         /* smaller font size, adjust as needed */
+    padding: 6px 12px;       /* a little smaller padding for compact look */
+    cursor: pointer;
+    color: #555;                /* faded font color */
+    transition: background-color 0.2s;
+}
+
+#suggestions li:hover {
+    background-color: #f0f0f0; /* highlight on hover */
 }
 /* Top row: text + file input side by side */
 .form-top{
@@ -60,17 +85,21 @@ section h2 {
     align-items: center;
     
 }
-.special-form input[type="text"] {
-    width: 300px;
-    padding: 8px;
-    font-size: 16px;
-    border-radius: 10px;
-}
 
-/* Upload button aligned left under inputs */
-.special-form button{
-    align-self: flex-start;   /*push to left cornor*/
+#dishImage {
     margin-left: 30%;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: left;
+}
+#dishImage label {
+    font-size: 18px;
+    color: #013E3F;
+    font-weight: bold;
+    align-self: center;
+}
+#dishImage input[type="file"]::file-selector-button {
     background: #013E3F;
     color: #F0E3DB;
     border: none;
@@ -79,6 +108,38 @@ section h2 {
     border-radius: 5px;
     font-size: 15px;
 }
+#dishImage input[type="file"]::file-selector-button:hover {
+    background: hsl(181, 97%, 23%);
+    transform: scale(1.1);
+}
+
+.special-form #dishName {
+    width: 300px;
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 10px;
+}
+.special-form #dishPrice {
+    width: auto;
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 10px;
+}
+
+
+/* Upload button aligned left under inputs */
+.special-form button {
+    align-self: flex-start;
+    margin-left: 30%;
+    background: #013E3F;
+    color: #F0E3DB;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
 
 .special-dish button:hover {
     background: hsl(181, 97%, 23%);
