@@ -18,7 +18,7 @@ class Dish(models.Model):
         db_column = 'category_id',
         related_name = 'dishes'
     )
-
+    id = models.BigAutoField(primary_key=True)
     name = models.CharField(max_length = 200)
     burmese_name = models.CharField(max_length=200, blank=True)
     price = models.IntegerField()

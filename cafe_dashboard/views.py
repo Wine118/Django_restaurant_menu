@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.core.paginator import Paginator 
 from complaints.models import CustomerComplaint
 from menu.models import Order, Dish
+from .models import SpecialDish
 from django.utils import timezone
 from datetime import datetime, time
 from django.contrib.auth.decorators import login_required 
@@ -102,3 +103,52 @@ def dish_suggestions(request):
         data
         ,safe=False
     )
+
+@login_required
+def upload_special(request):
+    if request.method == "POST":
+        name = request.POST.get("dishName")
+        burmese_name = request.POST.get("dishEnglishName")
+        dish_id = request.POST.get("dishId")
+        price = request.POST.get("price")
+        images = request.FILES.getlist("images")
+
+        dish = None
+        if dish_id:
+            dish = Dish.objects.filter(id=dish_id).first()
+            price = dish.price if dish else price
+        
+
+
+
+        special = SpecialDish.objects.create(
+            dish=dish,
+            name=name,
+            burmese_name=burmese_name,
+            price=price,
+            image1=images[0] if len(images) > 0 else None,
+            image2=images[1] if len(images) > 1 else None,
+            image3=images[2] if len(images) > 2 else None,
+        )
+
+        return JsonResponse({"status":"success", "special_id": special.id,"special_name": special.name,"special_burmese_name": special.burmese_name,"special_price": special.price,"image1": special.image1.url if special.image1 else None},status=201)
+
+    return JsonResponse({"status":"error", "message":"Invalid request method."},status=400)
+
+
+def latest_special(request):
+    special = SpecialDish.objects.order_by("-created_at").first()
+
+    if not special:
+        return JsonResponse({"exists": False})
+
+    data = {
+        "exists": True,
+        "name": special.burmese_name or special.name,
+        "images": [
+            special.image1.url if special.image1 else None,
+            special.image2.url if special.image2 else None,
+            special.image3.url if special.image3 else None,
+        ]
+    }
+    return JsonResponse(data)

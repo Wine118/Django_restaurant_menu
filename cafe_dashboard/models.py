@@ -7,7 +7,8 @@ class SpecialDish(models.Model):
         Dish,
         on_delete=models.SET_NULL,
         null=True,
-        blank=True
+        blank=True,
+        db_constraint=True,
     )
 
     name = models.CharField(max_length=200)

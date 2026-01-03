@@ -8,12 +8,13 @@
       <!-- Instruction text above the form --> 
       <form class="special-form" id="specialForm">
         <div class="form-top">
-          <input id="dishName" type="text" placeholder = "Enter SpecialDish Name" autocomplete = "off">
+          <input id="dishName" type="text" placeholder = "Enter SpecialDish Name" autocomplete = "off" required>
           <ul id="suggestions"></ul>
           <input type="hidden" id="dishId">
+          <input type="hidden" id="dishEnglishName">
           
           <!-- New Dish Price input --> 
-        <input id="dishPrice" type="number" placeholder="Enter Special's Dish Price (MMK)">
+        <input id="dishPrice" type="number" placeholder="Enter Special's Dish Price (MMK)"  min="0">
         </div>
         <div id="dishImage">
           <label for="folderUpload">Dish Images:</label>
