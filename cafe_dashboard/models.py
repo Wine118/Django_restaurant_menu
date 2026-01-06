@@ -17,4 +17,6 @@ class SpecialDish(models.Model):
     image1 = models.ImageField(upload_to="special/")
     image2 = models.ImageField(upload_to="special/", null=True, blank=True)
     image3 = models.ImageField(upload_to="special/", null=True, blank=True)
+    active = models.BooleanField(default=False)
+
     created_at = models.DateTimeField(auto_now_add=True)

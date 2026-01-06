@@ -88,56 +88,134 @@ def dish_suggestions(request):
     if not q:
         return JsonResponse([], safe=False)
 
+    suggestions = []
+    seen_names = set() #KEY FIX
+    
+    # First: check SpecialDish table
+    specials = SpecialDish.objects.filter(
+        Q(name__icontains=q) | Q(burmese_name__icontains=q)
+    )
+
+    for special in specials:
+        dish_name = special.dish.name if special.dish else special.name
+        if dish_name in seen_names:
+            continue   
+
+        seen_names.add(dish_name)
+        suggestions.append({
+            "id": special.dish.id if special.dish else None,
+            "name": special.name,
+            "burmese_name": special.burmese_name,
+            "price": special.price,
+            "source":"special"
+        })
+
+        
+
+    
+
+     # Second: check Dish table
     dishes = Dish.objects.filter(
         Q(name__icontains=q) | Q(burmese_name__icontains=q)
-    )[:10]
-    # Send both id, name and burmese_name
-    data = [
-        {
+    )
+    
+    for dish in dishes:
+        if dish.name in seen_names:
+            continue
+        seen_names.add(dish.name)
+        suggestions.append({
             "id": dish.id,
             "name": dish.name,
-            "burmese_name": dish.burmese_name
-        } for dish in dishes
-    ]
-    return JsonResponse(
-        data
-        ,safe=False
-    )
+            "burmese_name": dish.burmese_name,
+            "price": dish.price,
+            "source":"menu"
+        })
+    return JsonResponse(suggestions, safe=False)    
+
+    
+        
+    
 
 @login_required
 def upload_special(request):
     if request.method == "POST":
         name = request.POST.get("dishName")
-        burmese_name = request.POST.get("dishEnglishName")
+        burmese_name = request.POST.get("dishBurmeseName")
         dish_id = request.POST.get("dishId")
         price = request.POST.get("price")
-        images = request.FILES.getlist("images")
+        images = request.FILES.getlist("images")       
+
 
         dish = None
         if dish_id:
             dish = Dish.objects.filter(id=dish_id).first()
             price = dish.price if dish else price
+
+        # deactivate old special
+        SpecialDish.objects.filter(active=True).update(active=False)
         
+        special, created = SpecialDish.objects.get_or_create(name=name, defaults={
+            "dish": dish,
+            "name": name,
+            "burmese_name": burmese_name,
+            "price": price,
+            "active": True,
+            "image1": images[0] if len(images) > 0 else None,
+            "image2": images[1] if len(images) > 1 else None,
+            "image3": images[2] if len(images) > 2 else None,
+        })
+
+        if not created:
+            if special.price == int(price): 
+                # deactivate old special
+                SpecialDish.objects.filter(active=True).update(active=False)
+                special.active = True
+                if len(images) > 0:
+                    special.image1 = images[0]  
+                    if len(images) > 1:
+                        special.image2 = images[1]  
+                        if len(images) > 2:
+                         special.image3 = images[2]
+                special.save() 
+                return JsonResponse({"status":"success", "special name": special.name, "special price": special.price, "Is active": special.active},status=201)
+            else: 
+                special.price = int(price) 
+                special.active = True
+                 # Update images if new ones are provided   
+                if len(images) > 0:
+                    special.image1 = images[0]  
+                    if len(images) > 1:
+                        special.image2 = images[1]  
+                        if len(images) > 2:
+                         special.image3 = images[2]
+                special.save() 
+                return JsonResponse({"status":"success", "message":"Price is updated","special name": special.name, "special price": special.price, "Is active": special.active},status=201)
 
 
+        # special = SpecialDish.objects.create(
+        #     dish=dish,
+        #     name=name,
+        #     burmese_name=burmese_name,
+        #     price=price,
+        #     image1=images[0] if len(images) > 0 else None,
+        #     image2=images[1] if len(images) > 1 else None,
+        #     image3=images[2] if len(images) > 2 else None,
+        # )
 
-        special = SpecialDish.objects.create(
-            dish=dish,
-            name=name,
-            burmese_name=burmese_name,
-            price=price,
-            image1=images[0] if len(images) > 0 else None,
-            image2=images[1] if len(images) > 1 else None,
-            image3=images[2] if len(images) > 2 else None,
-        )
-
-        return JsonResponse({"status":"success", "special_id": special.id,"special_name": special.name,"special_burmese_name": special.burmese_name,"special_price": special.price,"image1": special.image1.url if special.image1 else None},status=201)
-
-    return JsonResponse({"status":"error", "message":"Invalid request method."},status=400)
+        
+        return JsonResponse({
+            "status":"success",
+            "special_id": special.id,
+            "special_name": special.name,
+            "special_burmese_name": special.burmese_name,
+            "special_price": special.price,
+            "image1": special.image1.url if special.image1 else None
+        }, status=201)
 
 
 def latest_special(request):
-    special = SpecialDish.objects.order_by("-created_at").first()
+    special = SpecialDish.objects.filter(active=True).first()
+
 
     if not special:
         return JsonResponse({"exists": False})

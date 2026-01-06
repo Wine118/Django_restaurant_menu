@@ -1,29 +1,4 @@
 console.log("External JS block loaded ✅");
-
-document.addEventListener("DOMContentLoaded", () => {
-  const imgElement = document.getElementById("special-img");
-  const images = window.images;
-
-  if (!images || images.length === 0) {
-    console.error("No images loaded");
-    return;
-  }
-
-  let index = 0;
-
-  setInterval(() => {
-    imgElement.style.opacity = 0;
-
-    setTimeout(() => {
-      index = (index + 1) % images.length;
-      imgElement.src = images[index];
-      imgElement.style.opacity = 1;
-    }, 600);
-  }, 3000);
-});
-
-
-
 // Special menu is adding to the cart system
 const multiSelectDishes = [
   "Nanpyar",
@@ -42,18 +17,60 @@ const multiSelectDishes = [
   "Tom Yum Soup"
 
 ];
-const specialItem = {
-    name : "ကြက်ကုန်းဘောင်",
-    price: 6000,
-    qty: 1
-};
 
-document.querySelector("#special-btn").addEventListener("click", () => {
+document.addEventListener("DOMContentLoaded", () => {
+  const imgElement = document.getElementById("special-img");
+  if(imgElement){
+    const images = JSON.parse(imgElement.dataset.images || "[]");
+    let index = 0;
 
+    // Function to change the image
+  if(images.length > 0){
+      setInterval(() => {
+          imgElement.style.opacity = 0;
+
+          setTimeout(() => {
+            index = (index + 1) % images.length;
+            imgElement.src = images[index];
+            imgElement.style.opacity = 1;
+          }, 600);
+        }, 3000);
+    
+      }
+    }
+  } 
+
+  // Add to Cart
+
+  
+);
+  
+
+
+
+
+
+
+
+const btn = document.getElementById("special-btn");
+
+btn.addEventListener("click", () => {
+
+    const name = btn.dataset.name;
+    const price = parseInt(btn.dataset.price);
+    const specialItem = {
+        name: name,
+        price: price,
+        qty: 1
+    };
+    console.log("Special Item:", specialItem);
     let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
 
     if(multiSelectDishes.includes(specialItem.name)){
-        window.location.href = `menu.html#category-menu#?item=${specialItem.name}`;
+      // Go to menu page to select options
+      console.log("Redirecting to menu for multi-select item.");
+      const anchor = slugify(specialItem.name); // slugify name
+      window.location.href = MENU_URL + "#" + anchor;
     }else{
         // Check if special item already add -> increase qty
         let item = cart.find(i => i.name === specialItem.name);
@@ -65,20 +82,25 @@ document.querySelector("#special-btn").addEventListener("click", () => {
         }
         localStorage.setItem("cartItems", JSON.stringify(cart));
 
-        if (localStorage.getItem("cartItems")) {
-        console.log("cartItems is in localStorage!");
-        } else {
-        console.log("No cartItems found.");
-        }
-
-        const cartItems = JSON.parse(localStorage.getItem("cartItems"));
-        console.log(cartItems);
+        
+        alert(`${specialItem.name} has been added to your cart.`);
 
 
-        // Go to menu page to show cart
-        // window.location.href = "menu.html#to-order";
+        // // Go to menu page to show cart
+        window.location.href = MENU_URL + "#to-order";
+
     }
 
     
 
 });
+
+// Helper to slugify names same as Django
+function slugify(text) {
+    return text.toString().toLowerCase()
+        .replace(/\s+/g, '-')           // Replace spaces with -
+        .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+        .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+        .replace(/^-+/, '')             // Trim - from start
+        .replace(/-+$/, '');            // Trim - from end
+}

@@ -4,8 +4,11 @@ const previewName = document.getElementById('previewName');
 const dishInput = document.getElementById('dishName');
 const dishEnglishInput = document.getElementById('dishEnglishName');
 const dishIdInput = document.getElementById('dishId');
+const dishPriceInput = document.getElementById('dishPrice');
 const suggestionBox = document.getElementById('suggestions');
 const form = document.querySelector('.special-form');
+let englishName = '';
+let burmeseName = '';
 
 let images = [];
 let currentIndex = 0;
@@ -64,7 +67,9 @@ dishInput.addEventListener("input", async () => {
     const query = dishInput.value.trim();
     dishIdInput.value = ""; // reset dish id
     dishEnglishInput.value = ""; // reset English name
-    suggestionBox.innerHTML = ""; // clear previous suggestions
+    suggestionBox.innerHTML = ""; // clear previous 
+    englishName = '';
+    burmeseName = '';
 
     if(!query){
         return;
@@ -77,13 +82,16 @@ dishInput.addEventListener("input", async () => {
 
         dishes.forEach(dish => {
             const li = document.createElement("li");
-            li.textContent = `${dish.name}(${dish.burmese_name}) `; // display Burmese if exists
+            li.textContent = dish.burmese_name ? `${dish.name}(${dish.burmese_name}) ` : dish.name; // display Burmese if exists
 
 
             li.onclick = () => {
                 dishInput.value = dish.burmese_name || dish.name;
                 dishEnglishInput.value = dish.name;
+                englishName = dish.name;
+                burmeseName = dish.burmese_name;
                 dishIdInput.value = dish.id;
+                dishPriceInput.value = dish.price ? dish.price : "";
                 suggestionBox.innerHTML = ""; // clear suggestions
                 suggestionBox.style.display = "none";
             };
@@ -114,22 +122,25 @@ form.addEventListener('submit', function(event) {
 
     // Prepare data for server
     const dishId = dishIdInput.value; // may be empty if new
-    const dishEnglishName = dishEnglishInput.value.trim();
-    const price = document.getElementById('dishPrice').value.trim();
+    const price = dishPriceInput.value.trim();
+
+    const formData = new FormData();
+    console.log(`The price is: ${price}`);
     if(!dishId && !price){
         alert("Please enter a dish price for the new special dish.");
         return;
+    }else if (dishId){
+        formData.append("dishName", englishName)
+    }else {
+        formData.append("dishName", dishName)
     }
 
-    console.log("Dish Name:", dishName);
-    console.log("Dish English Name:", dishEnglishName);
-    console.log("Dish ID:", dishId);
-    console.log("Price:", price);
-    console.log("Number of images to upload:", images.length);
+    
 
-    const formData = new FormData();
-    formData.append("dishName", dishName);
-    formData.append("dishEnglishName", dishEnglishName);
+    
+    
+    
+    formData.append("dishBurmeseName", burmeseName);
     formData.append("dishId", dishId);
     formData.append("price", price);
 
@@ -151,6 +162,8 @@ form.addEventListener('submit', function(event) {
         alert(data.message || "Special dish uploaded successfully!");
         // DO NOT reset preview
         suggestionBox.innerHTML = "";
+        englishName = '';
+        burmeseName = '';
          // reload persisted data from DB
         loadLatestSpecial();
     })
@@ -175,6 +188,7 @@ function getCookie(name) {
 
 async function loadLatestSpecial(){
     console.log("Loading latest special dish from server...");
+    
     try{
         const res = await fetch('/cafedashboard/latest-special/');
         const data = await res.json();
@@ -184,6 +198,7 @@ async function loadLatestSpecial(){
 
         // Set name
         previewName.textContent = data.name;
+        console.log("Price:", data.price);
 
         // Filter valid images
         const imgs = data.images.filter(Boolean);
