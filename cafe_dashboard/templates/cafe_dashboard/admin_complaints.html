@@ -1,0 +1,71 @@
+{% extends "cafe_dashboard/admin_base.html" %}
+{% load static %}
+{% block content %}
+     <section class="complaints" id="complaints">
+        <h2>Customer Complaints</h2>
+        <form method="get" style="margin-bottom: 15px;" id="select_date">
+          <input type="date" name="date" value="{{ selected_date }}">
+          <button type="submit">Filter</button>
+        </form>
+
+        <!-- Complaints Table -->
+         <div id="complaints-container" clas="complaints-container">
+            <table>
+               <thead>
+               <tr>
+                  <th>ID</th>
+                  <th>Customer Name</th>
+                  <th>Phone Number</th>
+                  <th>Message</th>
+                  <th>Read</th>
+                  <th>Serious Level</th>
+                  <th>Created At</th>
+               </tr>
+               </thead>
+               <tbody>
+               {% for complaint in complaints %}
+               <tr>
+                  <td>{{ complaint.id }}</td>
+                  <td>{{ complaint.customer_name }}</td>
+                  <td>{{ complaint.phone_number }}</td>
+                  <td>{{ complaint.message }}</td>
+                  <td>
+                     <input type="checkbox"
+                           class="read-checkbox"
+                           data-id="{{ complaint.id }}"
+                           {% if complaint.read %}checked{% endif %}>
+                  </td>
+                  <td>{{ complaint.get_serious_level_display }}</td>
+                  <td>{{ complaint.created_at|date:"Y-m-d H:i" }}</td>
+               </tr>
+               {% empty %}
+               <tr>
+                  <td colspan="7" style="text-align:center;">No complaints found.</td>
+               </tr>
+               {% endfor %}
+               </tbody>
+            </table>
+
+            <!-- Pagination -->
+            <div class="pagination" {% if selected_date %}data-date="{{ selected_date }}"{% endif %} style="margin-top: 10px;">
+               {% if complaints.has_previous %}
+               <button type="button" data-page="{{ complaints.previous_page_number }}">&lt;</button>
+               {% endif %}
+
+               <span>
+               Page {{ complaints.number }} of {{ complaints.paginator.num_pages }}
+               </span>
+
+               {% if complaints.has_next %}
+               <button type="button" data-page="{{ complaints.next_page_number }}">&gt;</button>
+               {% endif %}
+            </div>
+         </div>
+
+    </section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script defer src="{% static 'Javascript/admin_complaints.js' %}"></script>
+{% endblock %}

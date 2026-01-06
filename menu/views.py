@@ -1,6 +1,8 @@
 import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from .models import Category,Order, OrderItem
 # Create your views here.
@@ -49,3 +51,22 @@ def create_order_api(request):
         })
 
     return JsonResponse({"error":"POST only"}, status=405)
+
+
+ 
+@require_POST
+def toggle_processed(request):
+    data = json.loads(request.body)
+    order = get_object_or_404(Order, id=data.get("id"))
+    order.processed = data.get("processed", False)
+    order.save()
+    return JsonResponse({"status":"ok","processed":order.processed})
+
+
+@require_POST
+def toggle_phoned(request):
+    data = json.loads(request.body)
+    order = get_object_or_404(Order, id=data.get("id"))
+    order.phoned_delivered = data.get("phoned",False)
+    order.save()
+    return JsonResponse({"status":"ok","phoned":order.phoned_delivered})

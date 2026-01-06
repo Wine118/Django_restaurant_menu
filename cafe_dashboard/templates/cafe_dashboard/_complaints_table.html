@@ -30,7 +30,7 @@
   </tbody>
 </table>
 
-<div class="pagination">
+<div class="pagination" data-date="{{ selected_date|default:''}}">
   {% if complaints.has_previous %}
     <button data-page="{{ complaints.previous_page_number }}">&lt;</button>
   {% endif %}

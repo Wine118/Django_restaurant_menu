@@ -1,0 +1,41 @@
+
+{% extends "cafe_dashboard/admin_base.html" %}
+{% load static %}
+{% block content %}
+    <!-- ===== Today's Special ====== -->
+    <section class="special-dish" id="special-dish">
+      <h2>Upload Today's Special</h2>
+      <!-- Instruction text above the form --> 
+      <form class="special-form" id="specialForm">
+        <div class="form-top">
+          <input id="dishName" type="text" placeholder = "Enter SpecialDish Name" autocomplete = "off" required>
+          <ul id="suggestions"></ul>
+          <input type="hidden" id="dishId">
+          <input type="hidden" id="dishEnglishName">
+          
+          <!-- New Dish Price input --> 
+        <input id="dishPrice" type="number" placeholder="Enter Special's Dish Price (MMK)"  min="0">
+        </div>
+        <div id="dishImage">
+          <label for="folderUpload">Dish Images:</label>
+          <input id="folderUpload" type="file" accept="image/*" webkitdirectory directory multiple>
+        </div> 
+        <button type="submit">Upload</button>
+      </form>
+
+
+      <div class="special-preview">
+        <div class="preview-row">
+          <button id="prevBtn">&lt;</button>
+          <img id="previewImg" src="{% static 'images/special/special1.jpg' %}" alt="Dish Photo">
+          <button id="nextBtn">&gt;</button>
+        </div>
+        
+        <p id="previewName">Mohinga (Medium)</p>
+      </div>
+    </section>
+{% endblock %}
+
+{% block extra_js %}
+<script defer src="{% static 'Javascript/admin.js' %}"></script>
+{% endblock %}

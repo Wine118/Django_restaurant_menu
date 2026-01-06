@@ -37,11 +37,26 @@
 
         <div class="right">
             <h2>"Today's Special Menu"</h2>
-            <img id="special-img" src="{% static 'images/special/special1.jpg'%}" class="special-img" alt="Today's Special Dish">
-            <h3>ကြက်ကုန်းဘောင်</h3>
-            <a href="{% url 'menu' %}#to-order">
-              <button  id="special-btn">Order</button>
-            </a>
+            {% if special %}
+               <img 
+                id="special-img"
+                src="{{ special.image1.url}}"
+                class="special-img"
+                alt="Today's Special Dish"
+                data-images = '[
+                   {% if special.image1 %} "{{ special.image1.url }}",{% endif %}
+                   {% if special.image2 %} "{{ special.image2.url }}",{% endif %}
+                   {% if special.image3 %} "{{ special.image3.url }}"{% endif %}
+                ]'               
+               >
+               <h3>{{special.burmese_name|default:special.name}}</h3>
+               
+                <button  id="special-btn" data-name="{{ special.name}}" data-price="{{ special.price }}">Order</button>
+              
+               
+            {% else %}
+              <h3>No Special Dish Today. Please Check Back Later!</h3>
+            {% endif %}
             
         </div>
         
@@ -56,12 +71,8 @@
   </footer>
 
   <!-- Link to your JavaScript (defer ensures it runs after HTML is parsed) -->
-     <script>
-    window.images = [
-      "{% static 'images/special/special1.jpg' %}",
-      "{% static 'images/special/special2.jpg' %}",
-      "{% static 'images/special/special3.jpg' %}"
-    ];
+  <script>
+    const MENU_URL = "{% url 'menu' %}";
   </script>
   <script src="{% static 'Javascript/index.js' %}" defer></script>
 </body>
