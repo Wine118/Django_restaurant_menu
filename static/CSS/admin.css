@@ -75,6 +75,21 @@ section h2 {
 #suggestions li:hover {
     background-color: #f0f0f0; /* highlight on hover */
 }
+
+.logout-btn {
+    background: none;
+    border: none;
+    font-weight: bold;
+    font-size: larger;
+    color: white;
+    cursor: pointer;
+    margin-left: 15px;
+    padding-right: 30px;
+    font-size: 18px;
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+}
 /* Top row: text + file input side by side */
 .form-top{
     display: flex;
