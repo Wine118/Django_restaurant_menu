@@ -17,6 +17,8 @@ def admin_dashboard(request):
     return render(request, "cafe_dashboard/admin_dashboard.html")
 
 
+
+
 @login_required
 def admin_complaints(request):
     complaints_qs = CustomerComplaint.objects.all()

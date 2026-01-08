@@ -29,6 +29,7 @@ urlpatterns = [
 
     # Django built-in authentication URLs
     path('accounts/', include('django.contrib.auth.urls')),
+    
 ]
 
 if settings.DEBUG:
